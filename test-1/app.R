@@ -43,7 +43,10 @@ ui <- fluidPage(
 server <- function(input, output) {
 
     output$wd <- renderPrint({
-        out <- getwd()
+        work_dir <- getwd()
+        home_dir <- Sys.getenv("HOME")
+        out <- cat('work dir: ', work_dir, 
+            "home dir: ", home_dir)
         out
     })
     output$games <- renderTable({
