@@ -16,6 +16,9 @@ library(sodium)
 library(tidyverse)
 library(rhandsontable)
 library(lubridate)
+
+source("./helper.R")
+source("./global.R")
 # Define UI for application that draws a histogram
 ui <- fluidPage(
 
@@ -30,7 +33,8 @@ ui <- fluidPage(
 
         # Show a plot of the generated distribution
         mainPanel(
-           textOutput("wd")
+           textOutput("wd"),
+           tableOutput("games")
         )
     )
 )
@@ -41,6 +45,9 @@ server <- function(input, output) {
     output$wd <- renderPrint({
         out <- getwd()
         out
+    })
+    output$games <- renderTable({
+        league_games
     })
 }
 
