@@ -33,6 +33,7 @@ ui <- fluidPage(
 
         # Show a plot of the generated distribution
         mainPanel(
+            actionButton("save", label = "Save"),
            textOutput("wd"),
            tableOutput("games")
         )
@@ -46,12 +47,18 @@ server <- function(input, output) {
         work_dir <- getwd()
         home_dir <- Sys.getenv("HOME")
         out <- cat('work dir: ', work_dir, 
-            "home dir: ", home_dir)
+            "home dir: ", home_dir, " \n path.expand: ", path.expand("~"), " \ndata/test/anders/file_name.csv")
         out
     })
     output$games <- renderTable({
         league_games
     })
+    
+    observeEvent(input$save,
+                 {
+                     df <- data.frame(x = 1:10)
+                     write.csv(df, file = "data/test/anders/file_name.csv")
+                 })
 }
 
 # Run the application 
