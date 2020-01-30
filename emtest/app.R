@@ -1,6 +1,3 @@
-#browser()
-#print(getwd())
-#browser()
 library(rvest)
 library(shiny)
 library(shinydashboard)
@@ -220,4 +217,4 @@ server <- function(input, output, session) {
   })
 }
 
-#runApp(list(ui = ui, server = server), launch.browser = TRUE)
+shinyApp(ui = ui, server = server)
