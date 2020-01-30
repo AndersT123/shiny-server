@@ -47,7 +47,7 @@ server <- function(input, output) {
         work_dir <- getwd()
         home_dir <- Sys.getenv("HOME")
         out <- cat('work dir: ', work_dir, 
-            "home dir: ", home_dir, " \n path.expand: ", path.expand("~"), " \ndata/test/anders/file_name.csv")
+            "home dir: ", home_dir, " \n path.expand: ", path.expand("~"), "pathdata/test/anders/file_name.csv")
         out
     })
     output$games <- renderTable({
@@ -57,7 +57,7 @@ server <- function(input, output) {
     observeEvent(input$save,
                  {
                      df <- data.frame(x = 1:10)
-                     write.csv(df, file = "data/test/anders/file_name.csv")
+                     write.csv(df, file = fs::path_wd("data/test/anders/file_name.csv"))
                  })
 }
 
