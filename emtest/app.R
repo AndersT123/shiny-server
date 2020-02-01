@@ -9,6 +9,7 @@ library(rhandsontable)
 library(lubridate)
 source("./helper.R")
 source("./global.R")
+source("./modules/user_table.R")
 # Main login screen
 
 
@@ -122,10 +123,12 @@ server <- function(input, output, session) {
               #       column(1, actionButton("debug", label = "Debug")))
               # ),
               fluidRow(
-                box(width = 6, 
+                box(width = 9, 
                     actionButton("save_button", "Save"),
                     rHandsontableOutput("hot")),
-                box(width = 6, tableOutput("league_table"))
+                box(width = 3, user_table_ui("user_table"))
+                    #tableOutput("user_table"))
+                    #callModule(user_table, "some id"))
               )
               
               )
@@ -212,9 +215,10 @@ server <- function(input, output, session) {
                  write_csv(data, path = paste0(data_dir,"/", input$user_name, "/games.csv"))
                })
   
-  output$league_table <- renderTable({
-    league_table
-  })
+  # output$league_table <- renderTable({
+  #   league_table
+  # })
+  callModule(user_table, "user_table")
 }
 
 shinyApp(ui = ui, server = server)
