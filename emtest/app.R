@@ -34,12 +34,7 @@ loginpage <- div(id = "loginpage", style = "width: 500px; max-width: 100%; margi
                      ))
                      )
 
-# Encrypted passwords by make-password.R file
-credentials <- read_csv("./data/test/meta.csv",
-                        col_types = cols(
-                          user_name = col_character(),
-                          user_pwpass  = col_character()
-                        ))
+
 
 header <- dashboardHeader( title = "Simple Dashboard", uiOutput("logoutbtn"))
 
@@ -99,37 +94,19 @@ server <- function(input, output, session) {
     browser()
   })
   
-  # server_start <- eventReactive(input$update_time,
-  #                             {
-  #                               server_start <- paste0(input$date, "-", input$hours, "-", input$minutes) %>% ymd_hm()
-  #                               server_start
-  #                             }, 
-  #                             # Setting ignoreNULL = FALSE will make the table render immidiately at startup, because otherwise the 
-  #                             # server_start object is not defined and the renderRHandsontABLE function depends on this, this is why
-  #                             # update server start needed to be pressed before it would render the table
-  #                             ignoreNULL = FALSE)
+  
   server_start <- function() now()
   
   
   output$body <- renderUI({
     if (USER$login == TRUE ) {
       tabItem(tabName ="dashboard", class = "active",
-              # fluidRow(
-              #   box(width = 12,
-              #       column(2, dateInput("date", label = "Select date to test", value = "2019-01-05")),
-              #       column(1, numericInput("hours", label = "Hours", min = 0, max = 23, step = 1, value = 16)),
-              #       column(1, numericInput("minutes", label = "Minutes", min = 0, max = 59, step = 1, value = 0)),
-              #       column(1, actionButton("update_time", label = "Update Server start")),
-              #       column(1, actionButton("debug", label = "Debug")))
-              # ),
               fluidRow(
                 box(width = 9, 
                     actionButton("save_button", "Save"),
                     rHandsontableOutput("hot")),
                 box(width = 3, user_table_ui("user_table"))
-                    #tableOutput("user_table"))
-                    #callModule(user_table, "some id"))
-              )
+                    )
               
               )
     }
@@ -149,7 +126,6 @@ server <- function(input, output, session) {
     # This will make the submit_time variable update in the table that the user is viewing
     input$save_button
 
-    #test_at()
     server_start <- server_start()
 
     # Load the latest saved user data
@@ -215,9 +191,6 @@ server <- function(input, output, session) {
                  write_csv(data, path = paste0(data_dir,"/", input$user_name, "/games.csv"))
                })
   
-  # output$league_table <- renderTable({
-  #   league_table
-  # })
   callModule(user_table, "user_table")
 }
 

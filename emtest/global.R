@@ -1,8 +1,14 @@
 data_dir <- "data/test"
 
-# Usernames are taken from the meta-data file
-user_names <- read_csv(paste0(data_dir,"/meta.csv"),  col_names = T) %>% pull("user_name")
 
+# Read in usernames and encrypted passwords
+credentials <- read_csv(paste0(data_dir, "/meta.csv"),
+                        col_types = cols(
+                          user_name = col_character(),
+                          user_pwpass  = col_character()
+                        ))
+# Usernames are taken from the meta-data file
+user_names <- credentials %>% pull("user_name")
 
 ## Calculate the current league standings. This is placed in global.R because it is not changing during the time that user are 
 ## interacting with the app
@@ -35,3 +41,5 @@ user_points <- map(scores_and_preds, function(x) pmap_dbl(x, compute_game_score)
 user_points_sum <- map(user_points, sum, na.rm = T) %>% unlist() %>% as.integer()
 
 league_table <- tibble("User Name" = user_names, "Points" = user_points_sum) %>% arrange(desc(Points))
+
+
