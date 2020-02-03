@@ -7,9 +7,9 @@ library(sodium)
 library(tidyverse)
 library(rhandsontable)
 library(lubridate)
-source("./helper.R")
-source("./global.R")
-source("./modules/user_table.R")
+source("helper.R")
+source("global.R")
+source("modules/user-table.R")
 source("modules/games-table.R")
 source("modules/login-page.R")
 
@@ -56,7 +56,6 @@ server <- function(input, output, session) {
                 box(width = 3, 
                     user_table_ui("user_table"))
               )
-              
       )
     }
     else { 
