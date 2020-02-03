@@ -1,1 +1,39 @@
 date_time,home_team,away_team,home_pred,away_pred,submit_time
+2020-01-29 20:45:00,West Ham,Liverpool,NA,NA,NA
+2020-02-01 13:30:00,Leicester,Chelsea,NA,NA,NA
+2020-02-01 16:00:00,Bournemouth,Aston Villa,NA,NA,NA
+2020-02-01 16:00:00,Crystal Palace,Sheffield United,NA,NA,NA
+2020-02-01 16:00:00,Liverpool,Southampton,NA,NA,NA
+2020-02-01 16:00:00,Newcastle,Norwich,NA,NA,NA
+2020-02-01 16:00:00,Watford,Everton,NA,NA,NA
+2020-02-01 16:00:00,West Ham,Brighton,NA,NA,NA
+2020-02-01 18:30:00,Manchester United,Wolverhampton,NA,NA,NA
+2020-02-02 15:00:00,Burnley,Arsenal,NA,NA,NA
+2020-02-02 17:30:00,Tottenham,Manchester City,NA,NA,NA
+2020-02-08 13:30:00,Everton,Crystal Palace,1,10,2020-02-03 20:28:53
+2020-02-08 18:30:00,Brighton,Watford,NA,NA,NA
+2020-02-09 15:00:00,Sheffield United,Bournemouth,NA,NA,NA
+2020-02-09 17:30:00,Manchester City,West Ham,NA,NA,NA
+2020-02-14 21:00:00,Wolverhampton,Leicester,NA,NA,NA
+2020-02-15 13:30:00,Southampton,Burnley,NA,NA,NA
+2020-02-15 18:30:00,Norwich,Liverpool,NA,NA,NA
+2020-02-16 15:00:00,Aston Villa,Tottenham,NA,NA,NA
+2020-02-16 17:30:00,Arsenal,Newcastle,NA,NA,NA
+2020-02-17 21:00:00,Chelsea,Manchester United,NA,NA,NA
+2020-02-22 13:30:00,Chelsea,Tottenham,NA,NA,NA
+2020-02-22 16:00:00,Burnley,Bournemouth,NA,NA,NA
+2020-02-22 16:00:00,Crystal Palace,Newcastle,NA,NA,NA
+2020-02-22 16:00:00,Sheffield United,Brighton,NA,NA,NA
+2020-02-22 16:00:00,Southampton,Aston Villa,NA,NA,NA
+2020-02-22 18:30:00,Leicester,Manchester City,NA,NA,NA
+2020-02-23 15:00:00,Manchester United,Watford,NA,NA,NA
+2020-02-23 15:00:00,Wolverhampton,Norwich,NA,NA,NA
+2020-02-23 17:30:00,Arsenal,Everton,NA,NA,NA
+2020-02-24 21:00:00,Liverpool,West Ham,NA,NA,NA
+2020-02-28 21:00:00,Norwich,Leicester,NA,NA,NA
+2020-02-29 13:30:00,Brighton,Crystal Palace,NA,NA,NA
+2020-02-29 16:00:00,Aston Villa,Sheffield United,NA,NA,NA
+2020-02-29 16:00:00,Bournemouth,Chelsea,NA,NA,NA
+2020-02-29 16:00:00,Newcastle,Burnley,NA,NA,NA
+2020-02-29 16:00:00,West Ham,Southampton,NA,NA,NA
+2020-02-29 18:30:00,Watford,Liverpool,NA,NA,NA
