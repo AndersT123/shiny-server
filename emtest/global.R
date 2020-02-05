@@ -1,6 +1,6 @@
 data_dir <- "data/test"
 
-
+server_start <- function() now()
 # Read in usernames and encrypted passwords
 credentials <- read_csv(paste0(data_dir, "/meta.csv"),
                         col_types = cols(

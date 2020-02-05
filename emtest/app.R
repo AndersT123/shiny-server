@@ -26,7 +26,6 @@ server <- function(input, output, session) {
   
   login_mod <- callModule(loginpage, "login")
   callModule(user_table, "user_table")
-  server_start <- function() now()
   callModule(games_table, "games_table", reactive({login_mod$user()}) , server_start = server_start)
   
 
