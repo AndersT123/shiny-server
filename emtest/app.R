@@ -12,6 +12,7 @@ source("global.R")
 source("modules/user-table.R")
 source("modules/games-table.R")
 source("modules/login-page.R")
+source("modules/plyd-games.R")
 
 header <- dashboardHeader( title = "Simple Dashboard", uiOutput("logoutbtn"))
 sidebar <- dashboardSidebar(uiOutput("sidebarpanel")) 
@@ -50,10 +51,11 @@ server <- function(input, output, session) {
     if (login_mod$login() == TRUE) {
       tabItem(tabName ="dashboard", class = "active",
               fluidRow(
-                box(width = 9, 
-                    games_table_ui("games_table")),
-                box(width = 3, 
-                    user_table_ui("user_table"))
+                column(7, box(width = NULL, 
+                    games_table_ui("games_table"))),
+                column(5, 
+                       box(width = NULL, user_table_ui("user_table")),
+                       box(width = NULL, plyd_games_output("plyd_games")))
               )
       )
     }
