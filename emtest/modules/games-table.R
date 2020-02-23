@@ -9,7 +9,8 @@ games_table_ui <- function(id) {
 }
 
 
-games_table <- function(input, output, session, user_name, server_start) {
+games_table <- function(input, output, session, user_name) {
+                        #, server_start) {
 
   output$hot <- renderRHandsontable({
     # update the table at every 15 minutes to ensure that cells will be locked if session is started close to game time
@@ -30,7 +31,6 @@ games_table <- function(input, output, session, user_name, server_start) {
   observeEvent(input$save_button,
                {
                  #browser()
-                 server_start <- server_start()
                  # The data to be saved is only the user games table, so the predictions and the submit time of the predictions
                  
                  data <- hot_to_r(input$hot)
@@ -39,14 +39,24 @@ games_table <- function(input, output, session, user_name, server_start) {
                  # submit_time should only be set if the pred_ variables are valid for being set during the session
                  # and they are non-NA
                  
-                 condition <- server_start - minutes(30) > data$date_time
+                 # Convert the data$date_time and data$submit_time to date-time variables
+                 # Add year to string such that data$date_time character can be converted to string
+                 
+                 data <- data %>% mutate(
+                   date_time = ydm_hm(paste0("2020-", date_time)),
+                   submit_time = ydm_hm(paste0("2020-", submit_time))
+                 )
+                 
+                 
+                 condition <- (now() - minutes(30)) > data$date_time
                  #condition <- as_datetime(server_start) - minutes(30) > as_datetime(data$date_time)
                  
                  data <- data %>% mutate(submit_time = if_else(!condition &
                                                                  !is.na(home_pred) | !is.na(away_pred),
-                                                               as.character(server_start),
+                                                               now(),
                                                                submit_time)) %>%
                    select(date_time, home_team, away_team, home_pred, away_pred, submit_time)
+                 
                  
                  write_csv(data, path = paste0(data_dir,"/", user_name(), "/games.csv"))
                })
@@ -55,7 +65,7 @@ games_table <- function(input, output, session, user_name, server_start) {
 ## Function used within the games_table to extract the correct data given username and do some data manipulations
 get_data <- function(user_name) {
   #browser()
-  server_start <- server_start()
+  #server_start <- server_start()
   
   # Load the latest saved user data
   test_path <- paste0(data_dir,"/", user_name, "/games.csv")
@@ -83,10 +93,11 @@ get_data <- function(user_name) {
   # Find a good solution for how to update this during the user is using the app
   # Conversion from character back to datetime to do the comparison with server_start
   #condition <- as_datetime(server_start) - minutes(30) > as_datetime(data$date_time)
-  condition <- server_start - minutes(30) > data$date_time
+  condition <- now() - minutes(30) > data$date_time
   read_only_rows <- which(condition)
   #browser()
-  # coerce date_time variable to characters because rhandsontable do not support POSIXt and format
+  
+  # Convert date_time variable to characters because rhandsontable do not support POSIXt and format
   data <- data %>% mutate(date_time   = format(date_time, format = "%d-%b %H:%M"),
                           submit_time = format(submit_time, format = "%d-%b %H:%M"))
   
