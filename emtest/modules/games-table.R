@@ -101,9 +101,10 @@ get_data <- function(user_name) {
   data <- data %>% mutate(date_time   = format(date_time, format = "%d-%b %H:%M"),
                           submit_time = format(submit_time, format = "%d-%b %H:%M"))
   
-  data <- rhandsontable(data) %>%
+  data <- rhandsontable(data, rowHeaders = NULL) %>%
     hot_col(col = read_only_cols, readOnly = T) %>%
     hot_row(row = read_only_rows, readOnly = T) %>%
+    hot_col(col = c("home_pred","away_pred"), colWidths = 30) %>%
     hot_table(highlightCol = T, highlightRow = T)
   data
 }
