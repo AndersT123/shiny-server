@@ -22,7 +22,7 @@ scrape_games <- function(from_date, to_date){
 }
 
 # Compute scores
-compute_game_score <- function(home_score, home_pred, away_score, away_pred){
+compute_game_score <- function(home_score, home_pred, away_score, away_pred, ...){
   # Returns score, with is in 0-5
   # Correct winner/draw prediction gives 2 points
   # Correct score for a team gives 1 point, for each team

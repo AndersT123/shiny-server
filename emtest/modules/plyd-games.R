@@ -13,6 +13,19 @@ plyd_games_output <- function(id){
 plyd_games <- function(input, output, session){
   
   output$plyd_table <- renderTable({
-    df <- read_csv(file.path(data_dir, input$plyd_user))
+    df <- read_csv(file.path(data_dir, input$plyd_user, "games.csv"),
+                   col_types = cols(
+                     date_time = col_datetime(),
+                     home_team = col_character(),
+                     away_team = col_character(),
+                     home_pred = col_integer(),
+                     away_pred = col_integer()))
+    # join with league games to get the actual game scores for the played games
+    df  <- inner_join(df, league_games)
+    
+    
+    df$points <- pmap_dbl(df, compute_game_score) %>% as.integer()
+    
+    df <- df %>% select(home_team, away_team, home_pred, away_pred, points)
   })
 }
