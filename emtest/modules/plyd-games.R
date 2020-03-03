@@ -19,9 +19,12 @@ plyd_games <- function(input, output, session){
                      home_team = col_character(),
                      away_team = col_character(),
                      home_pred = col_integer(),
-                     away_pred = col_integer()))
+                     away_pred = col_integer())) 
+      
     # join with league games to get the actual game scores for the played games
-    df  <- inner_join(df, league_games)
+    df  <- inner_join(df, league_games) %>%
+      # remove games that have not been played yet, i.e. include only games with valid scores
+      filter(!is.na(home_score) & !is.na(away_score))
     
     
     df$points <- pmap_dbl(df, compute_game_score) %>% as.integer()
