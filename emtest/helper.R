@@ -32,7 +32,7 @@ compute_game_score <- function(home_score, home_pred, away_score, away_pred, ...
   if(is.na(home_score) | is.na(away_score) ) return(score <- NA_integer_)
   
   # home_pred or away_pred is NA --> score is zero
-  if(is.na(home_pred) | is.na(away_pred)) return(score <- 0)
+  if(is.na(home_pred) | is.na(away_pred)) return(score <- 0L)
   #browser()
   # Establish correct winner/draw
   game_outcome <- case_when(

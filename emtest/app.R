@@ -7,12 +7,15 @@ library(sodium)
 library(tidyverse)
 library(rhandsontable)
 library(lubridate)
+library(plotly)
+library(glue)
 source("helper.R")
 source("global.R")
 source("modules/user-table.R")
 source("modules/games-table.R")
 source("modules/login-page.R")
 source("modules/plyd-games.R")
+source("modules/user-standings.R")
 #source("modules/test.R")
 header <- dashboardHeader( title = "Simple Dashboard", uiOutput("logoutbtn"))
 sidebar <- dashboardSidebar(uiOutput("sidebarpanel")) 
@@ -26,6 +29,7 @@ server <- function(input, output, session) {
   })
   
   login_mod <- callModule(loginpage, "login")
+  callModule(user_standings, "user_standings1")
   callModule(user_table, "user_table")
   callModule(games_table, "games_table", reactive({login_mod$user()}) )#, server_start = now())
   callModule(plyd_games, "plyd_games")
@@ -51,11 +55,14 @@ server <- function(input, output, session) {
     if (login_mod$login() == TRUE) {
       tabItem(tabName ="dashboard", class = "active",
               fluidRow(
-                column(6, tags$b("Current standings"), 
-                       box(width = NULL, 
-                    games_table_ui("games_table"))),
                 column(6, 
-                       box(width = NULL, user_table_ui("user_table")),
+                       box(width = NULL, games_table_ui("games_table"))
+                       ),
+                column(6, 
+                       box(width = NULL, title = "Current Standings",
+                           user_table_ui("user_table")),
+                       box(width = NULL, 
+                           user_standings_ui("user_standings1")),
                        box(width = NULL, plyd_games_output("plyd_games"))
                        )
               )
