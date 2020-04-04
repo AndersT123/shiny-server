@@ -16,7 +16,7 @@ source("modules/games-table.R")
 source("modules/login-page.R")
 source("modules/plyd-games.R")
 source("modules/user-standings.R")
-#source("modules/test.R")
+
 header <- dashboardHeader( title = "Simple Dashboard", uiOutput("logoutbtn"))
 sidebar <- dashboardSidebar(uiOutput("sidebarpanel")) 
 body <- dashboardBody(shinyjs::useShinyjs(), uiOutput("body"))
@@ -24,14 +24,14 @@ body <- dashboardBody(shinyjs::useShinyjs(), uiOutput("body"))
 ui<-dashboardPage(header, sidebar, body, skin = "blue")
 
 server <- function(input, output, session) {
-  observeEvent(input$debug,{
-    browser()
-  })
+  # observeEvent(input$debug,{
+  #   browser()
+  # })
   
   login_mod <- callModule(loginpage, "login")
   callModule(user_standings, "user_standings1")
   callModule(user_table, "user_table")
-  callModule(games_table, "games_table", reactive({login_mod$user()}) )#, server_start = now())
+  callModule(games_table, "games_table", reactive({login_mod$user()}) )
   callModule(plyd_games, "plyd_games")
 
   output$logoutbtn <- renderUI({
