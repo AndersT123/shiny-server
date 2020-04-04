@@ -28,7 +28,8 @@ user_games <- map(user_dirs, read_csv, col_types = cols(
   away_team = col_character(),
   home_pred = col_integer(),
   away_pred = col_integer(),
-  submit_time = col_datetime()))
+  submit_time = col_datetime()),
+  locale = locale(tz = ""))
 
 set_names(user_games, user_names)
 # 3. join data
