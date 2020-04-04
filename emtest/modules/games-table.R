@@ -11,7 +11,7 @@ games_table_ui <- function(id) {
 
 
 games_table <- function(input, output, session, user_name) {
-  browser()    
+  #browser()    
   # Fetch specific user data from disk and join with league data
   data_list <- reactive(get_data(user_name = user_name()))
   
@@ -37,7 +37,7 @@ games_table <- function(input, output, session, user_name) {
   
   observeEvent(input$save_button,
                {
-                 browser()
+                 #browser()
                  # The data to be saved is only the user predictions and the submit time of the predictions
                  
                  # input$hot can either be the mobile or pc version of the widgets. 
