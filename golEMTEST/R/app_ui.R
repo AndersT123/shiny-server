@@ -9,9 +9,12 @@ app_ui <- function(request) {
     # Leave this function for adding external resources
     golem_add_external_resources(),
     # List the first level UI elements here 
-    fluidPage(
-      h1("golEMTEST")
-    )
+    shinydashboard::dashboardPage(
+      shinydashboard::dashboardHeader( title = "Simple Dashboard", uiOutput("logoutbtn")),
+      shinydashboard::dashboardSidebar(uiOutput("sidebarpanel")), 
+      shinydashboard::dashboardBody(shinyjs::useShinyjs(), uiOutput("body")), 
+      skin = "blue")
+    
   )
 }
 
