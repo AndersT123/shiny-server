@@ -9,12 +9,10 @@ app_ui <- function(request) {
     # Leave this function for adding external resources
     golem_add_external_resources(),
     # List the first level UI elements here 
-    shinydashboard::dashboardPage(
-      shinydashboard::dashboardHeader( title = "Simple Dashboard", uiOutput("logoutbtn")),
-      shinydashboard::dashboardSidebar(uiOutput("sidebarpanel")), 
-      shinydashboard::dashboardBody(shinyjs::useShinyjs(), uiOutput("body")), 
-      skin = "blue")
-    
+    fluidPage(
+      h1("golemops1"),
+      verbatimTextOutput("ops1")
+    )
   )
 }
 
@@ -36,7 +34,7 @@ golem_add_external_resources <- function(){
     favicon(),
     bundle_resources(
       path = app_sys('app/www'),
-      app_title = 'golEMTEST'
+      app_title = 'golemops1'
     )
     # Add here other external resources
     # for example, you can add shinyalert::useShinyalert() 

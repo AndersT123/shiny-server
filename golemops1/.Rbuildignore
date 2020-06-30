@@ -4,4 +4,5 @@
 dev_history.R
 ^dev$
 $run_dev.*
-^README\.Rmd$
+^app\.R$
+^rsconnect$
