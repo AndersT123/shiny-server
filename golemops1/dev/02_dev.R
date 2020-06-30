@@ -15,25 +15,17 @@
 
 ## Dependencies ----
 ## Add one line by package you want to add as dependency
-usethis::use_package( "ggplot2" )
-usethis::use_package( "shinydashboard" )
 usethis::use_package( "readr" )
-usethis::use_package( "optparse" )
 
 ## Add modules ----
 ## Create a module infrastructure in R/
-golem::add_module( name = "loginpage" ) # Name of the module
-golem::add_module( name = "games_table" ) # Name of the module
-golem::add_module( name = "user_table" ) # Name of the module
-golem::add_module( name = "plyd_games" ) # Name of the module
-golem::add_module( name = "user_standings" ) # Name of the module
-
+golem::add_module( name = "name_of_module1" ) # Name of the module
+golem::add_module( name = "name_of_module2" ) # Name of the module
 
 ## Add helper functions ----
 ## Creates ftc_* and utils_*
 golem::add_fct( "helpers" ) 
-golem::add_utils( "create_league" )
-golem::add_utils( "source_in" )
+golem::add_utils( "helpers" )
 
 ## External resources
 ## Creates .js and .css files at inst/app/www
@@ -52,7 +44,7 @@ usethis::use_test( "app" )
 # Documentation
 
 ## Vignette ----
-usethis::use_vignette("golEMTEST")
+usethis::use_vignette("golemops1")
 devtools::build_vignettes()
 
 ## Code coverage ----

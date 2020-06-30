@@ -14,13 +14,13 @@
 ## Fill the DESCRIPTION ----
 ## Add meta data about your application
 golem::fill_desc(
-  pkg_name = "golEMTEST", # The Name of the package containing the App 
-  pkg_title = "Test of EM-app", # The Title of the package containing the App 
-  pkg_description = "Compete with your friends about providing predictions for the upcoming european champtionship in soccer.", # The Description of the package containing the App 
-  author_first_name = "Anders", # Your First Name
-  author_last_name = "Tvistholm", # Your Last Name
-  author_email = "anderstvistholm@live.dk", # Your Email
-  repo_url = "https://github.com/AndersT123/shiny-server.git" # The URL of the GitHub Repo (optional) 
+  pkg_name = "golemops1", # The Name of the package containing the App 
+  pkg_title = "PKG_TITLE", # The Title of the package containing the App 
+  pkg_description = "PKG_DESC.", # The Description of the package containing the App 
+  author_first_name = "AUTHOR_FIRST", # Your First Name
+  author_last_name = "AUTHOR_LAST", # Your Last Name
+  author_email = "AUTHOR@MAIL.COM", # Your Email
+  repo_url = NULL # The URL of the GitHub Repo (optional) 
 )     
 
 ## Set {golem} options ----
@@ -29,7 +29,7 @@ golem::set_golem_options()
 ## Create Common Files ----
 ## See ?usethis for more information
 usethis::use_mit_license( name = "Golem User" )  # You can set another license here
-usethis::use_readme_rmd( open = T )
+usethis::use_readme_rmd( open = FALSE )
 usethis::use_code_of_conduct()
 usethis::use_lifecycle_badge( "Experimental" )
 usethis::use_news_md( open = FALSE )

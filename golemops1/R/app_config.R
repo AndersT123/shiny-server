@@ -5,7 +5,7 @@
 #' 
 #' @noRd
 app_sys <- function(...){
-  system.file(..., package = "golEMTEST")
+  system.file(..., package = "golemops1")
 }
 
 
