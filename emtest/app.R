@@ -7,11 +7,15 @@ library(sodium)
 library(tidyverse)
 library(rhandsontable)
 library(lubridate)
+library(plotly)
+library(glue)
 source("helper.R")
 source("global.R")
 source("modules/user-table.R")
 source("modules/games-table.R")
 source("modules/login-page.R")
+source("modules/plyd-games.R")
+source("modules/user-standings.R")
 
 header <- dashboardHeader( title = "Simple Dashboard", uiOutput("logoutbtn"))
 sidebar <- dashboardSidebar(uiOutput("sidebarpanel")) 
@@ -20,14 +24,15 @@ body <- dashboardBody(shinyjs::useShinyjs(), uiOutput("body"))
 ui<-dashboardPage(header, sidebar, body, skin = "blue")
 
 server <- function(input, output, session) {
-  observeEvent(input$debug,{
-    browser()
-  })
+  # observeEvent(input$debug,{
+  #   browser()
+  # })
   
   login_mod <- callModule(loginpage, "login")
+  callModule(user_standings, "user_standings1")
   callModule(user_table, "user_table")
-  callModule(games_table, "games_table", reactive({login_mod$user()}) , server_start = server_start)
-  
+  callModule(games_table, "games_table", reactive({login_mod$user()}) )
+  callModule(plyd_games, "plyd_games")
 
   output$logoutbtn <- renderUI({
     req(login_mod$login())
@@ -50,18 +55,25 @@ server <- function(input, output, session) {
     if (login_mod$login() == TRUE) {
       tabItem(tabName ="dashboard", class = "active",
               fluidRow(
-                box(width = 9, 
-                    games_table_ui("games_table")),
-                box(width = 3, 
-                    user_table_ui("user_table"))
+                column(6, 
+                       box(width = NULL, games_table_ui("games_table"))
+                       ),
+                column(6, 
+                       box(width = NULL, title = "Current Standings",
+                           user_table_ui("user_table")),
+                       box(width = NULL, 
+                           user_standings_ui("user_standings1")),
+                       box(width = NULL, plyd_games_output("plyd_games"))
+                       )
               )
+              
       )
     }
     else { 
       loginpage_ui("login")
     }
   })
-  
+
 }
 
 shinyApp(ui = ui, server = server)

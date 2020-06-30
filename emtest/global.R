@@ -28,8 +28,10 @@ user_games <- map(user_dirs, read_csv, col_types = cols(
   away_team = col_character(),
   home_pred = col_integer(),
   away_pred = col_integer(),
-  submit_time = col_datetime()))
+  submit_time = col_datetime()),
+  locale = locale(tz = ""))
 
+set_names(user_games, user_names)
 # 3. join data
 scores_and_preds <- map(user_games, function(x) inner_join(x, league_games,
                                                            by = c("date_time", "home_team", "away_team")) %>%
